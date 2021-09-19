@@ -1,3 +1,5 @@
+### what the user model should be once fully fielded out
+
 const pool = require('../utils/pool');
 
 module.exports = class User {
@@ -5,14 +7,16 @@ module.exports = class User {
     email;
     first_name;
     last_name;
-  
+    password_digest;
+    tel;
 
     constructor(row){
         this.id = row.id;
         this.email = row.email;
         this.first_name = row.first_name;
         this.last_name = row.last_name;
-        
+        this.password_digest = row.password_digest;
+        this.tell = row.tel;
     }
 
     static async insert(user){
@@ -22,23 +26,18 @@ module.exports = class User {
         } = await pool.query(`INSERT INTO users 
         (email, 
             first_name, 
-            last_name) 
-        VALUES ($1, $2, $3) 
+            last_name, 
+            password_digest, 
+            tel
+            ) 
+        VALUES ($1, $2, $3, 
+            $4, $5
+            ) 
         RETURNING *`, 
         [user.email, user.first_name, user.last_name, 
-            
+            user.password_digest, user.tel
         ]);
         return new User(rows[0]);
-    }
-    static async getUsers(){
-        try {
-            const { rows } = await pool.query(
-              'SELECT * FROM users');
-            return rows.map(user =>  new User(user));
-          } catch(error) {
-            error;
-          }
-        
     }
 
 }
