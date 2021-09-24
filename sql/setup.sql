@@ -8,5 +8,3 @@ CREATE TABLE users (
     -- last_name text not null
     -- tel text not null
 );
-
-
