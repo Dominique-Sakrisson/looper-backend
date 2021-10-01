@@ -4,7 +4,7 @@ const PORT = process.env.PORT || 3000;
 app.use((req, res, next) => {
     res.header(
       "Access-Control-Allow-Origin",
-      "http://localhost:7891"
+      // "http://localhost:7891"
       // "http://<YOUR-APP-NAME>.herokuapp.com"
     );
     res.header(
