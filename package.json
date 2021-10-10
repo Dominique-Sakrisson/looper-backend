@@ -9,8 +9,11 @@
   "scripts": {
     "test": "jest --verbose --runInBand",
     "test:watch": "npm run test -- --watch",
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "start": "node -r dotenv/config server.js",
+    "start:watch": "nodemon -r dotenv/config server.js",
+    "dev": "nodemon server.js",
+    "setup-db": "node -r dotenv/config setup-db.js",
+    "setup-heroku": "heroku run npm run setup-db"
   },
   "author": "Dominique Sakrisson",
   "license": "ISC",
@@ -18,10 +21,15 @@
     "jest": "^27.2.0"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "heroku": "^7.59.0",
+    "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.12",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "pg": "^8.5.1"
   }
 }
